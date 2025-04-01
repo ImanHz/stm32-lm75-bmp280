@@ -1,7 +1,7 @@
 #include "main.h"
-
+uint8_t temp_data[2] = { 0, 0 };
 int16_t read_lm75(void) {
-	uint8_t temp_data[2] = { 0, 0 };
+
 	uint8_t reg = 0x00; // Temperature register
 	HAL_I2C_Master_Transmit(I2C, (LM75_ADDR << 1), &reg, 1, HAL_MAX_DELAY);
 	HAL_I2C_Master_Receive(I2C, (LM75_ADDR << 1) | 0x01, temp_data, 2,

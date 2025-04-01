@@ -37,9 +37,9 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-extern I2C_HandleTypeDef hi2c2;
+extern I2C_HandleTypeDef hi2c1;
 
-#define I2C &hi2c2
+#define I2C &hi2c1
 
 #define LM75_ADDR 0x48
 #define BMP280_ADDR 0x76
@@ -51,7 +51,7 @@ extern I2C_HandleTypeDef hi2c2;
 #define BMP280_CALIB_REGISTER 0x88
 #define BMP280_DATA_REGISTER 0xF7
 
-#define BME280_CONCAT_BYTES(msb, lsb)  (((uint16_t)msb << 8) | (uint16_t)lsb)
+#define BMP280_CONCAT_BYTES(msb, lsb)  (((uint16_t)msb << 8) | (uint16_t)lsb)
 
 
 typedef struct {
@@ -81,7 +81,7 @@ typedef struct {
 
 	/*! Variable to store the intermediate temperature coefficient */
 	int32_t t_fine;
-} bme280_calib_data_t;
+} bmp280_calib_data_t;
 
 typedef struct {
 	int32_t pressure;
@@ -110,12 +110,12 @@ uint8_t check_bmp280(void);
 void read_bmp280(bmp280_raw_t *bmp280_data);
 void read_bmp280_calib_values(uint8_t *calib_regs, uint8_t len);
 void parse_temp_press_calib_data(const uint8_t *reg_data,
-		bme280_calib_data_t *calib_data);
-void init_bmp280(uint8_t* calib_regs, bme280_calib_data_t* bme_calib_data);
+		bmp280_calib_data_t *calib_data);
+void init_bmp280(uint8_t* calib_regs, bmp280_calib_data_t* bme_calib_data);
 int32_t compensate_temperature(const bmp280_raw_t *uncomp_data,
-		bme280_calib_data_t *calib_data);
+		bmp280_calib_data_t *calib_data);
 uint32_t compensate_pressure(const bmp280_raw_t *uncomp_data,
-		bme280_calib_data_t *calib_data);
+		bmp280_calib_data_t *calib_data);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
