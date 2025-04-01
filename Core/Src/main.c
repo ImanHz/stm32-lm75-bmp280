@@ -115,7 +115,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		temp_raw = ((int16_t) read_lm75() * 10) / 2;
+		temp_raw = read_lm75();
 //		HAL_Delay(1000);
 
 		read_bmp280(&bmp280_data);

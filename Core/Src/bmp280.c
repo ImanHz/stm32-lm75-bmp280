@@ -73,8 +73,15 @@ void init_bmp280(uint8_t *calib_regs, bmp280_calib_data_t *bme_calib_data) {
 
 	// check bmp280 device id
 	// TODO: add timeout!
-	while (check_bmp280() != 1) {
 
+	uint8_t cnt = 0;
+	while ( (check_bmp280() != 1) && (cnt < 100)) {
+		cnt++;
+		HAL_Delay(10);
+	}
+
+	if (cnt >= 100) {
+		return;
 	}
 
 	// setting default configuration

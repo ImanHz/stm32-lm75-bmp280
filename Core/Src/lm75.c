@@ -9,6 +9,6 @@ int16_t read_lm75(void) {
 
 	// Convert to temperature (LM75 uses 9-bit resolution)
 	uint16_t temp_raw = (uint16_t) ((temp_data[0] << 8)) | (temp_data[1]);
-	temp_raw = ((temp_raw) >> 7) & 255; // Right shift for 9-bit data
-	return temp_raw;
+	temp_raw = ((temp_raw) >> 7); // Right shift for 9-bit data
+	return (((int16_t) temp_raw) * 10) / 2;
 }
